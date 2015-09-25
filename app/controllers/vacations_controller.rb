@@ -6,12 +6,11 @@ class VacationsController < ApplicationController
 
   def show
     vacation = vacation.find(params[:id])
-    render json: employee, status 200
+    render json: vacation, status 200
   end
 
   def new
     render json: locals: { new_post: Post.new }
-
   end
 
   def create
@@ -26,6 +25,17 @@ class VacationsController < ApplicationController
       render json: todo.to_json, status: 201
     end
   end
+
+  def update      #do we even need this because it wouldn't show on the page as a choice if it wasn't valid
+    if Vacation.exists?(params[:id])
+      vacation                = Vacation.find(params[:id])
+      vacation.date_taken     = params.fetch(:vacation).fetch(:date_taken)
+      vacation.days_left      = params.fetch(:vacation).fetch(:days_left)
+      vacation.save
+      render json: vacation.to_json, status: 200
+    else
+      render json: { error_msg: 'Employee vacation record not found.', id: params[:id] }.to_json, status: 404
+    end
 
   def error
     render json: { error: 'There has been an error' }, status: 500
