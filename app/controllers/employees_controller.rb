@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   def index
-    employee = Employee.new
+    employee = Employee.all
     render json: employee.to_json, status: 200
   end
 
@@ -9,17 +9,15 @@ class EmployeesController < ApplicationController
     render json: employee.to_json, status: 200
   end
 
-  def new
-  end
-
   def create
     employee = Employee.new
-    employee.name           = params([:name])
-    employee.dept           = params([:dept])
-    employee.yrs_employed   = params([:yrs_employed])
-    employee.position       = params([:position])
-    employee.status         = params([:status])
-    employee.pay            = params([:pay])
+    employee.name           = params[:name]
+    employee.dept           = params[:dept]
+    employee.yrs_employed   = params[:yrs_employed]
+    employee.position       = params[:position]
+    employee.status         = params[:status]
+    employee.pay            = params[:pay]
+    employee.days_left      = params[:days_left]
     employee.save
     render json: employee.to_json, status: 200
   end
