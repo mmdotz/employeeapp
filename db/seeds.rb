@@ -6,18 +6,25 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+dates = []
+100.times do
+ dates.push(Faker::Date.between(10.years.ago, Date.today))
+end
+
 15.times do
- employee = Employee.new({
-   name: Faker::Name.name,
-   dept: Faker::Commerce.department,
-   yrs_employed: Faker::Number.number(2),
-   position: ['secretary', 'accountant', 'manager', 'analyst'].sample,
-   status: ['full-time', 'part-time'].sample,
-   pay: ['hourly', 'salary'].sample
+ employee = Employee.create({
+   name:          Faker::Name.name,
+   dept:          Faker::Commerce.department,
+   yrs_employed:  Faker::Number.number(2),
+   position:      ['secretary', 'accountant', 'manager', 'analyst'].sample,
+   status:        ['full-time', 'part-time'].sample,
+   pay:           ['hourly', 'salary'].sample,
+   days_left:     Faker::Number.between(0, 14).to_s
    })
 
-  employee.vacations.build({
-   date_taken: Faker::Date.backward(3650),
-   days_left: [0..14].sample
+  [1, 2, 3, 4].sample.times do Vacation.create({
+   date_taken:    dates.sample.strftime("%m/%d/%y"),
+   employee_id:   employee.id
    })
+  end
 end
