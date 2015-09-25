@@ -1,27 +1,6 @@
 Rails.application.routes.draw do
-  get 'vacations/index'
-
-  get 'vacations/show'
-
-  get 'vacations/new'
-
-  get 'vacations/create'
-
-  get 'vacations/update'
-
-  get 'vacations/destroy'
-
-  get 'employees/index'
-
-  get 'employees/show'
-
-  get 'employees/new'
-
-  get 'employees/create'
-
-  get 'employees/update'
-
-  get 'employees/destroy'
+  resources :employees
+  resources :vacations
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
