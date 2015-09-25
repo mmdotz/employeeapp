@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  resources :employees
-  resources :vacations
+
+  resources :employees do
+    resources :vacations
+  end
 
   root    'employees#index'
-
 
   match '*not_found_route', to: 'application#not_found', via: [:get, :post, :put, :delete]
   # The priority is based upon order of creation: first created -> highest priority.

@@ -6,12 +6,18 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-employee = Employee.create({
-    name:           "Michelle Dotzenrod"
-    dept:           "Engineering"
-    yrs_employed:    17
-    position:       "Headmistress"
-    status:         "part-time"
-    pay:            "salary"
-  })
+15.times do
+ employee = Employee.new({
+   name: Faker::Name.name,
+   dept: Faker::Commerce.department,
+   yrs_employed: Faker::Number.number(2),
+   position: ['secretary', 'accountant', 'manager', 'analyst'].sample,
+   status: ['full-time', 'part-time'].sample,
+   pay: ['hourly', 'salary'].sample
+   })
 
+ employee.vacations.build({
+   date_taken: Faker::Date.backward(3650)
+   days_left: (0..14).sample
+   })
+end
