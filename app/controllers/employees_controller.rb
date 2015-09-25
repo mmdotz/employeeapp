@@ -1,18 +1,27 @@
 class EmployeesController < ApplicationController
   def index
     employee = Employee.new
-    render json: employee.to_json, status 200
+    render json: employee.to_json, status: 200
   end
 
   def show
     employee = Employee.find(params[:id])
-    render json: employee.to_json, status 200
+    render json: employee.to_json, status: 200
   end
 
   def new
   end
 
   def create
+    employee = Employee.new
+    employee.name           = params([:name])
+    employee.dept           = params([:dept])
+    employee.yrs_employed   = params([:yrs_employed])
+    employee.position       = params([:position])
+    employee.status         = params([:status])
+    employee.pay            = params([:pay])
+    employee.save
+    render json: employee.to_json, status: 200
   end
 
   def update      #do we even need this because it wouldn't show on the page as a choice if it wasn't valid

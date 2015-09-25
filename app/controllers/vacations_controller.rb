@@ -14,18 +14,18 @@ class VacationsController < ApplicationController
     render json: new_employee.to_json, status: 200
   end
 
-  def create  ##not sure on this one
-    if params[**employee/id/vacation.date_taken**].nil? || params[**employee/id/vacation.days_left**].empty?
-      err_msg = "An 'employee' parameter was empty or not found"
-      render json: { error_msg: err_msg }.to_json, status: 422
-    else
-      # todo = todo.create(task: params[:task])
-      vacation = Todo.new
-      vacation. = params[:task]
-      todo.save
-      render json: todo.to_json, status: 201
-    end
-  end
+  # def create  ##not sure on this one
+  #   if params[**employee/id/vacation.date_taken**].nil? || params[**employee/id/vacation.days_left**].empty?
+  #     err_msg = "An 'employee' parameter was empty or not found"
+  #     render json: { error_msg: err_msg }.to_json, status: 422
+  #   else
+  #     # todo = todo.create(task: params[:task])
+  #     vacation = Todo.new
+  #     vacation. = params[:task]
+  #     todo.save
+  #     render json: todo.to_json, status: 201
+  #   end
+  # end
 
   def update      #do we even need this because it wouldn't show on the page as a choice if it wasn't valid
     if Vacation.exists?(params[:employee_id])

@@ -16,8 +16,8 @@
    pay: ['hourly', 'salary'].sample
    })
 
- employee.vacations.build({
-   date_taken: Faker::Date.backward(3650)
-   days_left: (0..14).sample
+  employee.vacations.build({
+   date_taken: Faker::Date.backward(3650),
+   days_left: [0..14].sample
    })
 end
