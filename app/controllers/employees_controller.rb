@@ -35,9 +35,9 @@ class EmployeesController < ApplicationController
     if Employee.exists?(params[:id])
       employee = Employee.find(params[:id])
       employee.destroy
-      render json: { message: "Employee Terminated and record deleted successfully." }, status: 200
+      render json: { message: "Employee terminated and record deleted successfully." }, status: 200
     else
-      render json: { error_msg: 'No valid Employee Found', id: params[:id] }.to_json, status: 404
+      render json: { error_msg: 'No valid employee found', id: params[:id] }.to_json, status: 404
     end
   end
 end

@@ -1,16 +1,17 @@
 class VacationsController < ApplicationController
   def index
     vacations = Vacation.new
-    render json: vacation, status 200
+    render json: vacation, status: 200
   end
 
   def show
-    vacation = vacation.find(params[:id])
-    render json: vacation, status 200
+    vacation = vacation.find(params[:employee_id])
+    render json: vacation, status: 200
   end
 
   def new
-    render json: locals: { new_post: Post.new }
+    new_employee: Employee.new
+    render json: new_employee, status: 200
   end
 
   def create
@@ -27,8 +28,8 @@ class VacationsController < ApplicationController
   end
 
   def update      #do we even need this because it wouldn't show on the page as a choice if it wasn't valid
-    if Vacation.exists?(params[:id])
-      vacation                = Vacation.find(params[:id])
+    if Vacation.exists?(params[:employee_id])
+      vacation                = Vacation.find(params[:employee_id])
       vacation.date_taken     = params.fetch(:vacation).fetch(:date_taken)
       vacation.days_left      = params.fetch(:vacation).fetch(:days_left)
       vacation.save
@@ -44,5 +45,13 @@ class VacationsController < ApplicationController
 
 
   def destroy
+    if Vacation.exists?(params[:employee_id])
+      vacation = Vacation.find(params[:employee_sid])
+      vacation.destroy
+      render json: { message: "Vacation record deleted successfully." }, status: 200
+    else
+      render json: { error_msg: 'No vacation information found', id: params[:id] }.to_json, status: 404
+    end
+  end
   end
 end
