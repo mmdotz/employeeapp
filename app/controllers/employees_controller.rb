@@ -5,8 +5,12 @@ class EmployeesController < ApplicationController
   end
 
   def show
+    if Employee.exists?(params[:id])
     employee = Employee.find(params[:id])
     render json: employee.to_json, status: 200
+  else
+    render json: { error_msg: 'No such employee id', id: params[:id] }.to_json, status: 404
+
   end
 
   def create
@@ -38,11 +42,6 @@ class EmployeesController < ApplicationController
       render json: { error_msg: 'Employee record Not Found!', id: params[:id] }.to_json, status: 404
     end
   end
-
-  # def vacations
-  #   employee = Employee.find(params[:id])
-  #   render json: employee.vacations.to_json, status: 200
-  # end
 
   def destroy
     if Employee.exists?(params[:id])
