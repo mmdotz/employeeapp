@@ -3,7 +3,6 @@ class EmployeesController < ApplicationController
     employee = Employee.all
     # render json: employee.to_json(:include => :vacations), status: 200 #this doesn't work in heroku
     render json: employee.to_json, status: 200
-
   end
 
   def show
@@ -20,13 +19,14 @@ class EmployeesController < ApplicationController
     if days_left.exists?(params[:days_left])
       render json: days_left.to_json, status: 200
     else
-      render json: { error_msg: 'No employees with #{params[:days_left]}.'}.to_json, status: 404
+      render json: { error_msg: 'No employees with #{params[:days_left]} days left.'}.to_json, status: 404
     end
   end
 
-  def status
-    status =
-  end
+  # def status
+  #   status = Employee.where(status: params[:status])
+      # render json: status.to_json, status: 200
+  # end
 
 
 
@@ -72,4 +72,6 @@ class EmployeesController < ApplicationController
       render json: { error_msg: 'No valid employee found.', id: params[:id] }.to_json, status: 404
     end
   end
+
+
 end
