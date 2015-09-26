@@ -19,7 +19,7 @@ class EmployeesController < ApplicationController
     if days_left.exists?(params[:days_left])
       render json: days_left.to_json, status: 200
     else
-      render json: { error_msg: 'No employees with #{params[:days_left]} days left.'}.to_json, status: 404
+      render json: { error_msg: "No employees with #{params[:days_left]} days left."}.to_json, status: 404
     end
   end
 
