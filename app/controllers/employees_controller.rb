@@ -1,7 +1,9 @@
 class EmployeesController < ApplicationController
   def index
     employee = Employee.all
+    # render json: employee.to_json(:include => :vacations), status: 200
     render json: employee.to_json, status: 200
+
   end
 
   def show
@@ -10,8 +12,8 @@ class EmployeesController < ApplicationController
     render json: employee.to_json, status: 200
   else
     render json: { error_msg: 'No such employee id', id: params[:id] }.to_json, status: 404
-
   end
+end
 
   def create
     employee = Employee.new
@@ -22,6 +24,9 @@ class EmployeesController < ApplicationController
     employee.status         = params[:status]
     employee.pay            = params[:pay]
     employee.days_left      = params[:days_left]
+    employee.vacations.build(
+
+      )
     employee.save
     render json: employee.to_json, status: 200
   end
