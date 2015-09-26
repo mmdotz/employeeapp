@@ -31,12 +31,18 @@ class EmployeesController < ApplicationController
       employee.position       = params.fetch(:employee).fetch(:position)
       employee.status         = params.fetch(:employee).fetch(:status)
       employee.pay            = params.fetch(:employee).fetch(:pay)
+      employee.days_left      = params.fetch(:employee).fetch(:days_left)
       employee.save
       render json: employee.to_json, status: 200
     else
       render json: { error_msg: 'Employee record Not Found!', id: params[:id] }.to_json, status: 404
     end
   end
+
+  # def vacations
+  #   employee = Employee.find(params[:id])
+  #   render json: employee.vacations.to_json, status: 200
+  # end
 
   def destroy
     if Employee.exists?(params[:id])

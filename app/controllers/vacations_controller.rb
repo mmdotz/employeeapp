@@ -1,12 +1,11 @@
 class VacationsController < ApplicationController
   def index
-    vacations = Vacation.new
-    render json: vacations.to_json, status: 200
+    all_vacations_for_employee = Vacation.where(employee_id: params[:employee_id])
+    render json: all_vacations_for_employee.to_json, status: 200
   end
 
   def show
-    vacation = Vacation.find(params[:employee_id])
-    render json: vacation.to_json, status: 200
+
   end
 
   # def new
