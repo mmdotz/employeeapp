@@ -1,19 +1,29 @@
 class EmployeesController < ApplicationController
   def index
     employee = Employee.all
-    # render json: employee.to_json(:include => :vacations), status: 200
+    # render json: employee.to_json(:include => :vacations), status: 200 #this doesn't work in heroku
     render json: employee.to_json, status: 200
 
   end
 
   def show
     if Employee.exists?(params[:id])
-    employee = Employee.find(params[:id])
-    render json: employee.to_json, status: 200
-  else
-    render json: { error_msg: 'No such employee id', id: params[:id] }.to_json, status: 404
+      employee = Employee.find(params[:id])
+      render json: employee.to_json, status: 200
+    else
+      render json: { error_msg: 'No such employee id:', id: params[:id] }.to_json, status: 404
+    end
   end
-end
+
+  def days_left #needs a custom route
+    days_left = Employee.where(days_left: params[:days_left])
+    if days_left == nil
+      render json: { error_msg: 'No employees with #{params[:days_left]}.'}.to_json, status: 404
+    else
+      render json: days_left.to_json, status: 200
+    end
+  end
+
 
   def create
     employee = Employee.new
@@ -44,7 +54,7 @@ end
       employee.save
       render json: employee.to_json, status: 200
     else
-      render json: { error_msg: 'Employee record Not Found!', id: params[:id] }.to_json, status: 404
+      render json: { error_msg: 'Employee record not found.', id: params[:id] }.to_json, status: 404
     end
   end
 
@@ -54,7 +64,7 @@ end
       employee.destroy
       render json: { message: "Employee terminated and record deleted successfully." }, status: 200
     else
-      render json: { error_msg: 'No valid employee found', id: params[:id] }.to_json, status: 404
+      render json: { error_msg: 'No valid employee found.', id: params[:id] }.to_json, status: 404
     end
   end
 end

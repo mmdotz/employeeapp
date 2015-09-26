@@ -13,14 +13,6 @@ class VacationsController < ApplicationController
       render json: { error_msg: 'Employee vacation record not found.', id: params[:id] }.to_json, status: 404
     end
 
-  # def destroy
-  #   if Vacation.exists?(params[:employee_id])
-  #     vacation = Vacation.find(params[:employee_sid])
-  #     vacation.destroy
-  #     render json: { message: "Vacation record deleted successfully." }, status: 200
-  #   else
-  #     render json: { error_msg: 'No vacation information found', id: params[:id] }.to_json, status: 404
-  #   end
-  # end
-  # end
+
+
 end
