@@ -17,12 +17,17 @@ class EmployeesController < ApplicationController
 
   def days_left #needs a custom route
     days_left = Employee.where(days_left: params[:days_left])
-    if days_left == nil
-      render json: { error_msg: 'No employees with #{params[:days_left]}.'}.to_json, status: 404
-    else
+    if days_left.exists?(params[:days_left])
       render json: days_left.to_json, status: 200
+    else
+      render json: { error_msg: 'No employees with #{params[:days_left]}.'}.to_json, status: 404
     end
   end
+
+  def status
+    status =
+  end
+
 
 
   def create
