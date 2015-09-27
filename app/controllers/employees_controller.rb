@@ -10,11 +10,11 @@ class EmployeesController < ApplicationController
       employee = Employee.find(params[:id])
       render json: employee.to_json, status: 200
     else
-      render json: { error_msg: 'No such employee id:', id: params[:id] }.to_json, status: 404
+      render json: { error_msg: "No such employee id:", id: params[:id] }.to_json, status: 404
     end
   end
 
-  def days_left #needs a custom route
+  def days_left
     left = Employee.where(days_left: params[:days_left])
     if left == nil
       render json: { error_msg: "No employees with #{params[:days_left]} days left."}.to_json, status: 404
@@ -36,16 +36,15 @@ class EmployeesController < ApplicationController
     employee = Employee.new
     employee.name           = params[:name]
     employee.dept           = params[:dept]
-    employee.yrs_employed   = params[:yrs_employed]
+    # employee.yrs_employed   = params[:yrs_employed]
     employee.position       = params[:position]
     employee.status         = params[:status]
     employee.pay            = params[:pay]
-    employee.days_left      = params[:days_left]
-
-    # employee.vacations.build(
-
-    #   )
+    # employee.days_left      = params[:days_left]
     employee.save
+    # employee.vacations.build(
+    #   employee.date_taken    = params.fetch(:employee).fetch(:date_taken, params[:date_taken]
+    #   )
     render json: employee.to_json, status: 200
   end
 
@@ -62,7 +61,7 @@ class EmployeesController < ApplicationController
       employee.save
       render json: employee.to_json, status: 200
     else
-      render json: { error_msg: 'Employee record not found.', id: params[:id] }.to_json, status: 404
+      render json: { error_msg: "Employee record not found.", id: params[:id] }.to_json, status: 404
     end
   end
 
@@ -72,7 +71,7 @@ class EmployeesController < ApplicationController
       employee.destroy
       render json: { message: "Employee terminated and record deleted successfully." }, status: 200
     else
-      render json: { error_msg: 'No valid employee found.', id: params[:id] }.to_json, status: 404
+      render json: { error_msg: "No valid employee found.", id: params[:id] }.to_json, status: 404
     end
   end
 
