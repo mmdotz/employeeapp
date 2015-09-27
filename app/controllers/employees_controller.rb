@@ -32,8 +32,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-
-
   def create
     employee = Employee.new
     employee.name           = params[:name]
@@ -43,6 +41,7 @@ class EmployeesController < ApplicationController
     employee.status         = params[:status]
     employee.pay            = params[:pay]
     employee.days_left      = params[:days_left]
+
     # employee.vacations.build(
 
     #   )
@@ -50,7 +49,7 @@ class EmployeesController < ApplicationController
     render json: employee.to_json, status: 200
   end
 
-  def update      #do we even need this because it wouldn't show on the page as a choice if it wasn't valid
+  def update
     if Employee.exists?(params[:id])
       employee                = Employee.find(params[:id])
       employee.name           = params.fetch(:name, employee.name)
