@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   get     '/employees/days_left/:days_left', to: 'employees#days_left'
-  # get     '/employees/status/:status',       to: 'employees#status'
+  get     '/employees/status/:status',       to: 'employees#status'
 
   root    'employees#index'
 

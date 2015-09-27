@@ -15,18 +15,22 @@ class EmployeesController < ApplicationController
   end
 
   def days_left #needs a custom route
-    days_left = Employee.where(days_left: params[:days_left])
-    if days_left.exists?(params[:days_left])
-      render json: days_left.to_json, status: 200
-    else
+    left = Employee.where(days_left: params[:days_left])
+    if left == nil
       render json: { error_msg: "No employees with #{params[:days_left]} days left."}.to_json, status: 404
+    else
+      render json: left.to_json, status: 200
     end
   end
 
-  # def status
-  #   status = Employee.where(status: params[:status])
-      # render json: status.to_json, status: 200
-  # end
+  def status
+    status = Employee.where(status: params[:status])
+    if status == nil
+      render json: { error_msg: "No employees with #{params[:status]} status."}.to_json, status: 404
+    else
+      render json: status.to_json, status: 200
+    end
+  end
 
 
 
@@ -39,9 +43,9 @@ class EmployeesController < ApplicationController
     employee.status         = params[:status]
     employee.pay            = params[:pay]
     employee.days_left      = params[:days_left]
-    employee.vacations.build(
+    # employee.vacations.build(
 
-      )
+    #   )
     employee.save
     render json: employee.to_json, status: 200
   end
