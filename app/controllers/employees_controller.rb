@@ -53,13 +53,13 @@ class EmployeesController < ApplicationController
   def update      #do we even need this because it wouldn't show on the page as a choice if it wasn't valid
     if Employee.exists?(params[:id])
       employee                = Employee.find(params[:id])
-      employee.name           = params.fetch(:employee).fetch(:name)
-      employee.dept           = params.fetch(:employee).fetch(:dept)
-      employee.yrs_employed   = params.fetch(:employee).fetch(:yrs_employed)
-      employee.position       = params.fetch(:employee).fetch(:position)
-      employee.status         = params.fetch(:employee).fetch(:status)
-      employee.pay            = params.fetch(:employee).fetch(:pay)
-      employee.days_left      = params.fetch(:employee).fetch(:days_left)
+      employee.name           = params.fetch(:name, employee.name)
+      employee.dept           = params.fetch(:dept, employee.dept)
+      employee.yrs_employed   = params.fetch(:yrs_employed, employee.yrs_employed)
+      employee.position       = params.fetch(:position, employee.position)
+      employee.status         = params.fetch(:status, employee.status)
+      employee.pay            = params.fetch(:pay, employee.pay)
+      employee.days_left      = params.fetch(:days_left, employee.days_left)
       employee.save
       render json: employee.to_json, status: 200
     else
