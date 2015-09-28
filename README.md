@@ -132,4 +132,4 @@ Once the employee is deleted, if a `DELETE` request is sent again on the same id
 ``` -->
 
 ##Tables
-<img src = "./HackathonUML.png">
+<img src = "/HackathonUML.png">
