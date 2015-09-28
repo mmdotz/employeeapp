@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get     '/employees/days_left/:days_left', to: 'employees#days_left'
   get     '/employees/status/:status',       to: 'employees#status'
+  # post    '/employees/',                      to: 'vacations#create_date'
 
   root    'employees#index'
 
